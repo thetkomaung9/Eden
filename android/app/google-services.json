@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "550101334827",
+    "project_id": "karmastep-app",
+    "storage_bucket": "karmastep-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550101334827:android:61211dbec1adc57e3ea36e",
+        "android_client_info": {
+          "package_name": "com.example.eden"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF3_smxLbeY1Ji-4rGihbhtFEKn28Po7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
