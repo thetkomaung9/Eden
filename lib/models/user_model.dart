@@ -1,32 +1,34 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
-import 'screens/home_screen.dart';
-import 'providers/user_provider.dart';
+class UserModel {
+  final String id;
+  final String name;
+  final int steps;
+  final int points;
+  final String country;
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Firebase ချိတ်ဆက်ခြင်း
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => UserProvider()),
-      ],
-      child: KarmaStepApp(),
-    ),
-  );
-}
+  UserModel({
+    required this.id,
+    required this.name,
+    this.steps = 0,
+    this.points = 0,
+    this.country = 'Global',
+  });
 
-class KarmaStepApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'KarmaStep',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        useMaterial3: true,
-      ),
-      home: HomeScreen(),
+  factory UserModel.fromFirestore(Map<String, dynamic> data, String id) {
+    return UserModel(
+      id: id,
+      name: data['name'] ?? '',
+      steps: data['steps'] ?? 0,
+      points: data['points'] ?? 0,
+      country: data['country'] ?? 'Global',
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'steps': steps,
+      'points': points,
+      'country': country,
+    };
   }
 }

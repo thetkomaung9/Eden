@@ -7,10 +7,12 @@ class WorldMapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("World Conquest Map")),
+      appBar: AppBar(title: const Text('World Conquest Map')),
       body: const GoogleMap(
-        initialCameraPosition:
-            CameraPosition(target: LatLng(21.9162, 95.9560), zoom: 3),
+        initialCameraPosition: CameraPosition(
+          target: LatLng(21.9162, 95.9560),
+          zoom: 3,
+        ),
         mapType: MapType.hybrid,
         myLocationEnabled: true,
       ),

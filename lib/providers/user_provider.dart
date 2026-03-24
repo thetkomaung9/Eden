@@ -7,7 +7,9 @@ class UserProvider with ChangeNotifier {
   int _steps = 0;
   int _points = 0;
   Timer? _syncTimer;
-  String userId = "test_user_123"; // နောက်မှ Auth နဲ့ ချိတ်ပါမယ်
+
+  // TODO: replace with real auth user id
+  String userId = 'test_user_123';
 
   int get steps => _steps;
   int get points => _points;
@@ -15,7 +17,7 @@ class UserProvider with ChangeNotifier {
   void initPedometer() {
     Pedometer.stepCountStream.listen(
       _onStepCount,
-      onError: (error) => print("Pedometer Error: $error"),
+      onError: (e) => debugPrint('Pedometer error: $e'),
     );
   }
 
@@ -26,14 +28,13 @@ class UserProvider with ChangeNotifier {
     _scheduleSync();
   }
 
+  // debounce syncing so we don't hammer firestore on every step
   void _scheduleSync() {
     _syncTimer?.cancel();
-    _syncTimer = Timer(const Duration(seconds: 5), () {
-      _updateFirestore();
-    });
+    _syncTimer = Timer(const Duration(seconds: 5), _syncToFirestore);
   }
 
-  Future<void> _updateFirestore() async {
+  Future<void> _syncToFirestore() async {
     try {
       await FirebaseFirestore.instance.collection('users').doc(userId).set({
         'steps': _steps,
@@ -41,9 +42,8 @@ class UserProvider with ChangeNotifier {
         'lastUpdated': FieldValue.serverTimestamp(),
         'country': 'Myanmar',
       }, SetOptions(merge: true));
-      print("Data Synced!");
     } catch (e) {
-      print("Sync Error: $e");
+      debugPrint('Sync error: $e');
     }
   }
 }
