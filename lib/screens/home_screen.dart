@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import '../providers/user_provider.dart';
 import 'map_screen.dart';
 
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
-    final stepProgress = (user.steps % 10000) / 10000;
+    final stepProgress = ((user.steps % 10000) / 10000).clamp(0.0, 1.0);
 
     return Scaffold(
       appBar: AppBar(
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
               lineWidth: 15.0,
               percent: stepProgress,
               progressColor: Colors.green,
-              backgroundColor: Colors.grey.shade200,
+              backgroundColor: Colors.grey.shade800,
               circularStrokeCap: CircularStrokeCap.round,
               center: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

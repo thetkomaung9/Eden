@@ -1,6 +1,7 @@
 name: karmastep_eden
-description: A global green conquest game.
+description: WorldMonitor style green conquest game with KarmaCam.
 version: 1.0.0+1
+publish_to: 'none'
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -11,12 +12,24 @@ dependencies:
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.0
   cloud_firestore: ^4.8.3
+  firebase_storage: ^11.2.3
   google_maps_flutter: ^2.5.0
-  sensors_plus: ^4.0.2
   geolocator: ^10.1.0
+  camera: ^0.10.5
+  path_provider: ^2.1.1
   provider: ^6.0.5
+  sensors_plus: ^4.0.2
   percent_indicator: ^4.2.3
-  pedometer: ^4.0.2
+  image_picker: ^1.0.4
+  video_player: ^2.8.1  # Version လျှော့ထားသည် (Stable)
+  chewie: ^1.7.1        # Version လျှော့ထားသည် (Stable)
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/dark_map_style.json
